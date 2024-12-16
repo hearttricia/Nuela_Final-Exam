@@ -1,0 +1,92 @@
+import java.util.Stack;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        // Create an array of creatures with their power levels.
+        Creature[] creatures = {
+                new Creature("Dragon", 95),
+                new Creature("Griffin", 88),
+                new Creature("Unicorn", 78),
+                new Creature("Phoenix", 92),
+                new Creature("Centaur", 85)
+        };
+
+        // Bubble Sort: Descending Order by Power Level
+        bubbleSort(creatures);
+        System.out.println("*** Bubble Sort: Descending Order by Power Level ***");
+        for (Creature creature : creatures) {
+            System.out.println(creature.getName() + " - " + creature.getPowerLevel());
+        }
+
+        // Selection Sort: Ascending Order by Power Level
+        selectionSort(creatures);
+        System.out.println("*** Selection Sort: Ascending Order by Power Level ***");
+        for (Creature creature : creatures) {
+            System.out.println(creature.getName() + " - " + creature.getPowerLevel());
+        }
+
+        // Stack Implementation: Popping Creatures
+        Stack<Creature> stack = new Stack<>();
+        for (Creature creature : creatures) {
+            stack.push(creature);
+        }
+
+        System.out.println("*** Stack Implementation: Popping Creatures ***");
+        while (!stack.isEmpty()) {
+            Creature creature = stack.pop();
+            System.out.println("Popped: " + creature.getName() + " - " + creature.getPowerLevel());
+        }
+    }
+
+    // Bubble Sort Implementation
+    public static void bubbleSort(Creature[] creatures) {
+        int n = creatures.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (creatures[j].getPowerLevel() < creatures[j + 1].getPowerLevel()) {
+                    // Swap creatures[j] and creatures[j + 1]
+                    Creature temp = creatures[j];
+                    creatures[j] = creatures[j + 1];
+                    creatures[j + 1 ] = temp;
+                }
+            }
+        }
+    }
+
+    // Selection Sort Implementation
+    public static void selectionSort(Creature[] creatures) {
+        int n = creatures.length;
+        for (int i = 0; i < n - 1; i++) {
+            int minIndex = i;
+            for (int j = i + 1; j < n; j++) {
+                if (creatures[j].getPowerLevel() < creatures[minIndex].getPowerLevel()) {
+                    minIndex = j;
+                }
+            }
+            // Swap creatures[i] and creatures[minIndex]
+            Creature temp = creatures[i];
+            creatures[i] = creatures[minIndex];
+            creatures[minIndex] = temp;
+        }
+    }
+}
+
+class Creature {
+    private String name;
+    private int powerLevel;
+
+    public Creature(String name, int powerLevel) {
+        this.name = name;
+        this.powerLevel = powerLevel;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPowerLevel() {
+        return powerLevel;
+    }
+}
